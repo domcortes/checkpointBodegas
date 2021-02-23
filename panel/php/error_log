@@ -1,0 +1,24 @@
+[21-Jul-2020 10:41:29 America/Boise] PHP Fatal error:  Uncaught Error: Class 'metodos' not found in /home2/hostela1/public_html/menu/php/ingresoProductos.php:79
+Stack trace:
+#0 {main}
+  thrown in /home2/hostela1/public_html/menu/php/ingresoProductos.php on line 79
+[21-Jul-2020 10:42:19 America/Boise] PHP Fatal error:  Uncaught Error: Class 'metodos' not found in /home2/hostela1/public_html/menu/php/ingresoProductos.php:79
+Stack trace:
+#0 {main}
+  thrown in /home2/hostela1/public_html/menu/php/ingresoProductos.php on line 79
+[21-Jul-2020 12:11:44 America/Boise] PHP Fatal error:  Uncaught Error: Class 'metodos' not found in /home2/hostela1/public_html/menu/php/ingresoProductos.php:79
+Stack trace:
+#0 {main}
+  thrown in /home2/hostela1/public_html/menu/php/ingresoProductos.php on line 79
+[21-Jul-2020 12:15:09 America/Boise] PHP Fatal error:  Uncaught Error: Class 'metodos' not found in /home2/hostela1/public_html/menu/php/ingresoProductos.php:79
+Stack trace:
+#0 {main}
+  thrown in /home2/hostela1/public_html/menu/php/ingresoProductos.php on line 79
+[21-Jul-2020 12:15:14 America/Boise] PHP Fatal error:  Uncaught Error: Class 'metodos' not found in /home2/hostela1/public_html/menu/php/actualizarCategoria.php:47
+Stack trace:
+#0 {main}
+  thrown in /home2/hostela1/public_html/menu/php/actualizarCategoria.php on line 47
+[21-Jul-2020 12:15:16 America/Boise] PHP Fatal error:  Uncaught Error: Class 'metodos' not found in /home2/hostela1/public_html/menu/php/actualizarCategoria.php:47
+Stack trace:
+#0 {main}
+  thrown in /home2/hostela1/public_html/menu/php/actualizarCategoria.php on line 47

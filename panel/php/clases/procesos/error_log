@@ -1,0 +1,4 @@
+[11-Jul-2020 08:37:35 America/Boise] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home2/hostela1/public_html/menu/php/clases/Conexion.php on line 12
+[11-Jul-2020 08:37:35 America/Boise] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, boolean given in /home2/hostela1/public_html/menu/php/clases/crud.php on line 48
+[11-Jul-2020 08:38:16 America/Boise] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home2/hostela1/public_html/menu/php/clases/Conexion.php on line 12
+[11-Jul-2020 08:38:16 America/Boise] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, boolean given in /home2/hostela1/public_html/menu/php/clases/crud.php on line 48
