@@ -137,7 +137,7 @@
               </li>
               <li class="nav-item">
                  <a href="/panel/pages/tables/listaCatalogos.php" class="nav-link">
-                  <i class="fas fa-file-invoice"></i>
+                  <i class="fas fa-clipboard-list"></i>
                   <p>Listado de catalogos</p>
                 </a>
               </li>
