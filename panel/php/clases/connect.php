@@ -2,10 +2,10 @@
 
 $host="localhost";
 $puerto="3306";
-$user="root";
-$password="martin07081988";
-// $user="intranet";
-// $password="qwertyQXE59oplm%";
+// $user="root";
+// $password="martin07081988";
+$user="intranet";
+$password="qwertyQXE59oplm%";
 $baseDeDatos="accesoBodega";
 
 try{
