@@ -304,5 +304,11 @@
     });
   });
 </script>
+<script>
+  $("#calsel").change(function(){
+    var categoria = (this).val();
+    console.log(categoria);
+  })
+</script>
 </body>
 </html>
