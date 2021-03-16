@@ -306,7 +306,7 @@
 </script>
 <script>
   $("#calsel").change(function(){
-    var categoria = (this).val();
+    var categoria = document.getElementById("calsel");
     console.log(categoria);
   })
 </script>
