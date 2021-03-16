@@ -1,40 +1,48 @@
 <?php
-	session_start();
-	if (!$_SESSION['verificar']) {
-		header('');
-	} else {
-		$bodega = $_POST['bosel'];
-		if ($bodega==null) {
-			echo '<script>
-				alert("No has seleccionado bodega, por favor selecciona una");
-				window.location.href="../forms/selectorBodega.php"
-			</script>';
-		} else {
-			ob_start();
-			require_once("../../php/clases/Conexion.php");
-			require_once("../../php/clases/cc2.php");
-			require_once("../../php/clases/crud.php");
-			ob_start();
-			$idUsuario = $_SESSION['idUsuario'];
-			$rolUsuario = $_SESSION['nivelAcceso'];
-			$tsql= "SELECT dbo.MAEST.KOBO AS Bodega,
-						dbo.MAEST.KOPR AS SKU,
-						dbo.MAEPR.NOKOPR AS DESCRIPCION,
-						dbo.MAEST.STFI1 AS Stock,
-						dbo.TABBOPR.STMIPR AS STMinimo,
-						dbo.TABBOPR.STMAPR AS STMax
-					FROM dbo.MAEST INNER JOIN
-						dbo.MAEPR ON dbo.MAEST.KOPR = dbo.MAEPR.KOPR
-					INNER JOIN
-						dbo.TABBOPR ON dbo.MAEST.KOPR = dbo.TABBOPR.KOPR
-					AND dbo.MAEST.KOBO = dbo.TABBOPR.KOBO
-					WHERE
-						(dbo.MAEST.KOBO = '$bodega')";
-			$sentencia2 = $con->prepare($tsql,[PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL,]);
-			$sentencia2->execute();
-			$dataClient = $sentencia2->fetch(PDO::FETCH_ASSOC);
-		}
-	}
+session_start();
+if (!$_SESSION['verificar']) {
+    header('');
+} else {
+    if (isset($_POST['bosel'])) {
+        $bodega = $_POST['bosel'];
+    } else if (isset($_GET['boselget'])) {
+        $bodega = $_GET['boselget'];
+    } else {
+        echo '<script>
+        alert("No has seleccionado bodega, por favor selecciona una");
+
+      </script>';
+    }
+    ob_start();
+    require_once("../../php/clases/Conexion.php");
+    require_once("../../php/clases/cc2.php");
+    require_once("../../php/clases/crud.php");
+    ob_start();
+    $idUsuario = $_SESSION['idUsuario'];
+    $rolUsuario = $_SESSION['nivelAcceso'];
+    $tsql = "SELECT DISTINCT
+                dbo.MAEST.KOBO AS Bodega,
+                dbo.MAEST.KOPR AS SKU,
+                dbo.MAEPR.NOKOPR AS DESCRIPCION,
+                dbo.MAEST.STFI1 AS Stock,
+                dbo.TABBOPR.STMIPR AS STMinimo,
+                dbo.TABBOPR.STMAPR AS STMax
+              FROM
+                dbo.MAEST
+              INNER JOIN
+                dbo.MAEPR ON dbo.MAEST.KOPR = dbo.MAEPR.KOPR
+              INNER JOIN
+                dbo.TABBOPR ON dbo.MAEST.KOPR = dbo.TABBOPR.KOPR
+              AND dbo.MAEST.KOBO = dbo.TABBOPR.KOBO
+              INNER JOIN
+                dbo.TABPRE ON dbo.MAEST.KOPR = dbo.TABPRE.KOPR
+              WHERE (dbo.MAEST.KOBO = '$bodega')
+              AND
+                (dbo.MAEST.STFI1 <> 0)";
+    $sentencia2 = $con->prepare($tsql, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL,]);
+    $sentencia2->execute();
+    $dataClient = $sentencia2->fetch(PDO::FETCH_ASSOC);
+}
 ?>
 
 <!DOCTYPE html>
@@ -71,7 +79,7 @@
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini sidebar-collapse">
 <div class="wrapper">
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -99,7 +107,7 @@
         <div class="card card-success">
           <div class="card-header">
             <h3 class="card-title">LISTADO DE PRODUCTOS DE BODEGA <?php echo $bodega;?></h3>
-
+            <span id="resultado"></span>
           </div>
             <div class="card-body">
               <table id="example1" class="table table-bordered table-striped">
@@ -110,23 +118,63 @@
                     <th>Stock</th>
                     <th>Stock Critico</th>
                     <th>Stock Maximo</th>
+                    <th>Descripcion</th>
+                    <th>Fotos</th>
+                    <th>Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
                 	<?php
+                    $count = 0;
                 		while ($row = $sentencia2->fetch(PDO::FETCH_ASSOC)) {
+                      $stockMinimo = (int)$row['STMinimo'];
+                      $stockActual = (int)$row['Stock'];
+                      $stockMaximo = (int)$row['STMax'];
+                      $alertaNaranja = $stockMinimo + (($stockMinimo * 40)/100);
+                      $count++;
                 	?>
 		                <tr>
-		                    <td><p class="text-center"><?php echo $row['SKU'];?></p></td>
-		                    <td><?php echo $row['DESCRIPCION']?></td>
-		                    <td><?php echo $row['Stock']?></td>
-		                    <td><?php echo $row['STMinimo']?></td>
-		                    <td><?php echo $row['STMax']?></td>
+		                    <form id="stock-<?php echo $count;?>" action="">
+                          <td><p class="text-center"><?php echo $row['SKU'];?></p></td>
+                          <td><?php echo $row['DESCRIPCION']?></td>
+                          <td>
+                            <?php if ($stockActual<=$stockMinimo): ?>
+                              <button class="btn btn-block btn-danger"><?php echo $stockActual;?></button>
+                            <?php endif ?>
+                            <?php if ($stockActual>$alertaNaranja): ?>
+                              <button class="btn btn-block btn-success"><?php echo $stockActual;?></button>
+                            <?php endif ?>
+                            <?php if ($stockActual>$stockMinimo && $stockActual<$alertaNaranja): ?>
+                              <button class="btn btn-block btn-warning"><?php echo $stockActual;?></button>
+                            <?php endif ?>
+                          </td>
+                          <td class="text-center"><?php echo $stockMinimo;?></td>
+                          <td class="text-center"><?php echo $stockMaximo;?></td>
+                          <td><textarea style="font-size: 12px;" class="form-control" name="descripcionProducto<?php echo $count;?>" id="descripcionProducto<?php echo $count;?>" cols="35" rows="3" placeholder="sin descripcion... x ahora... 😀"></textarea></td>
+                          <td><input type="text" class="form-control" id="imagen<?php echo $count;?>" name="imagen<?php echo $count;?>" placeholder="URL de la foto"></td>
+                          <td>
+                            <select name="catalogo<?php echo $count;?>" id="catalogo<?php echo $count;?>" class="form-control">
+                                <option value="">Seleccione un catalogo</option>
+                                <?php
+                                $sql = "SELECT idCatalogo, nombreCatalogo FROM catalogo WHERE vigente='si'";
+                                $catalogos = $obj->mostrarDatos($sql);
+                                foreach ($catalogos as $catalogo) {
+                                ?>
+                                    <option value="<?php echo $catalogo['idCatalogo'] ?>"><?php echo $catalogo['nombreCatalogo'] ?></option>
+                                <?php } ?>
+                            </select>
+                            <input type="text" value="<?php echo $row['Bodega'] ?>" id='<?php echo "bodega" . $count; ?>' name="bodega<?php echo $count;?>">
+                            <input type="text" value="<?php echo $row['SKU']; ?>" id="sato<?php echo $count;?>" name="sato<?php echo $count;?>">
+                            <input type="text" value="<?php echo $row['DESCRIPCION']; ?>" id="nombre<?php echo $count;?>" name="nombre<?php echo $count;?>">
+                            <input type="text" value="0" id="precioVenta<?php echo $count;?>" name="precioVenta<?php echo $count;?>">
+                            <input type="button" onclick="realizaProceso(<?php echo $count;?>)" value="Sumar a catalogo" class="btn btn-success btn-block">
+                        </td>
+                      </form>
 		                </tr>
 	            	<?php
 	            		}
-						$sentencia2 = null;
-						$con = null;
+      						$sentencia2 = null;
+      						$con = null;
 	            	?>
                 </tbody>
                 <tfoot>
@@ -136,6 +184,9 @@
                     <th>Stock</th>
                     <th>Stock Critico</th>
                     <th>Stock Maximo</th>
+                    <th>Descripcion</th>
+                    <th>Fotos</th>
+                    <th>Acciones</th>
                   </tr>
                 </tfoot>
               </table>
@@ -274,6 +325,52 @@
       "autoWidth": false,
       "paging": true,
       "searching": true,
+      "language": {
+        "decimal": ",",
+        "thousands": ".",
+        "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+        "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+        "infoPostFix": "",
+        "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+        "loadingRecords": "Cargando...",
+        "lengthMenu": "Mostrar _MENU_ registros",
+        "paginate": {
+            "first": "Primero",
+            "last": "Último",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        },
+        "processing": "Procesando...",
+        "search": "Buscar:",
+        "searchPlaceholder": "Término de búsqueda",
+        "zeroRecords": "No se encontraron resultados",
+        "emptyTable": "Ningún dato disponible en esta tabla",
+        "aria": {
+            "sortAscending":  ": Activar para ordenar la columna de manera ascendente",
+            "sortDescending": ": Activar para ordenar la columna de manera descendente"
+        },
+        //only works for built-in buttons, not for custom buttons
+        "buttons": {
+            "create": "Nuevo",
+            "edit": "Cambiar",
+            "remove": "Borrar",
+            "copy": "Copiar",
+            "csv": "fichero CSV",
+            "excel": "tabla Excel",
+            "pdf": "documento PDF",
+            "print": "Imprimir",
+            "colvis": "Visibilidad columnas",
+            "collection": "Colección",
+            "upload": "Seleccione fichero...."
+        },
+        "select": {
+            "rows": {
+                _: '%d filas seleccionadas',
+                0: 'clic fila para seleccionar',
+                1: 'una fila seleccionada'
+            }
+        }
+    }
     });
     $('#example2').DataTable({
       "paging": true,
@@ -286,5 +383,37 @@
     });
   });
 </script>
+<script>
+    function realizaProceso(id) {
+      const bodega = document.getElementById(`bodega${id}`).value;
+      let catalogo = document.getElementById(`catalogo${id}`).value;
+      const imagen = document.getElementById(`imagen${id}`).value;
+      const sato = document.getElementById(`sato${id}`).value;
+      const nombre = document.getElementById(`nombre${id}`).value;
+      const descripcionProducto = document.getElementById(`descripcionProducto${id}`).value;
+      const precioVenta = document.getElementById(`precioVenta${id}`).value;
+      if (catalogo == "") {
+        catalogo = "nulo";
+      }
+      const parametros = {
+          "bodega": bodega,
+          "catalogo": catalogo,
+          "imagen": imagen,
+          "sato": sato,
+          "nombre": nombre,
+          "descripcionProducto": descripcionProducto,
+          "precioVenta": precioVenta
+      };
+        $.ajax({
+            data: parametros, //datos que se envian a traves de ajax
+            url: '../../php/goes/agregarCatalogo.php', //archivo que recibe la peticion
+            type: 'post', //método de envio
+            success: function(response) {
+                $("#resultado").html(response);
+            }
+        });
+    }
+</script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </body>
 </html>

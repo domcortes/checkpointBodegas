@@ -235,6 +235,7 @@
                   <tr>
                     <th>Fecha creación</th>
                     <th>Vale transitorio</th>
+                    <th>Usuario</th>
                     <th class="text-center">Tipo Documento</th>
                     <th>Nro. Documento</th>
                     <th>Monto</th>
@@ -244,7 +245,7 @@
                   <tbody>
                     <?php
                       $obj = new metodos();
-                      $sql = "SELECT * from url";
+                      $sql = "SELECT * from url inner join usuarios on url.idUser = usuarios.idusuario;";
                       $links = $obj->mostrarDatos($sql);
                       foreach ($links as $url) {
                     ?>
@@ -252,6 +253,7 @@
                     <form method="post" action="/panel/php/clases/procesos/actualizarLink.php">
                       <td class="text-center"><?php echo $url['fechaCreacion']; ?></td>
                       <td id="vatra" name="vatra"><?php echo $url['valeTransitorio'] ?></td>
+                      <td id="user" name="user"><?php echo $url['nombreUsuario'];?></td>
                       <input type="hidden" name="idurl" id="idurl"value="<?php echo base64_encode(base64_encode(base64_encode($url['idUrl']))); ?>">
                       <td>
                         <?php if ($url['tipoDocumento']==='not'): ?>
@@ -260,6 +262,7 @@
                             <option <?php if($url['tipoDocumento']==='FCV'){ echo 'selected="true"';}?> value="FCV" >Factura</option>
                             <option <?php if($url['tipoDocumento']==='BLV'){ echo 'selected="true"';}?> value="BLV">Boleta</option>
                             <option <?php if($url['tipoDocumento']==='NCE'){ echo 'selected="true"';}?> value="NCE">Nota de crédito</option>
+                            <option <?php if($url['tipoDocumento']==='SCO'){ echo 'selected="true"';}?> value="SCO">Sin concretar</option>
                           </select>
                         <?php endif ?>
 
@@ -275,7 +278,7 @@
                       </td>
                       <td>
                         <?php
-                          if($url['boleta']!="0"){
+                          if($url['boleta']!="0" || $url['tipoDocumento']=="SCO"){
                         ?>
                           <p class="text-center"><?php echo $url['boleta'];?></p>
                         <?php } else { ?>
@@ -299,6 +302,7 @@
                   <tr>
                     <th>Fecha creación</th>
                     <th>Vale transitorio</th>
+                    <th>Usuario</th>
                     <th class="text-center">Tipo Documento</th>
                     <th>Nro. Documento</th>
                     <th>Monto</th>

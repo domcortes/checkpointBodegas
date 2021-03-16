@@ -23,8 +23,12 @@
         $salidafechaIn = $aaaaStart.$mmStart.$ddStart;
         $salidafechaOut = $aaaaEnd.$mmEnd.$ddEnd;
       } else {
-        $salidafechaIn = '20210101';
-        $salidafechaOut = '20210131';
+        $fecha = new DateTime();
+        $fecha->modify('first day of this month');
+        $fecha2 = new DateTime();
+        $fecha2->modify('last day of this month');
+        $salidafechaIn = str_replace('-', '', $fecha->format('Y-m-d'));
+        $salidafechaOut = str_replace('-', '', $fecha2->format('Y-m-d'));
       }
     } else {
       echo '<script>alert("No tienes acceso a esta ventana, seras redirigido al home"); window.location="/panel/home.php";</script>';
@@ -65,7 +69,7 @@
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini sidebar-collapse">
 <div class="wrapper">
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -116,29 +120,6 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label>Minimal</label>
-                    <select class="form-control select2" style="width: 100%;" name="tipoFiltro" id="tipoFiltro">
-                      <option selected="selected">Alabama</option>
-                      <option>Alaska</option>
-                      <option>California</option>
-                      <option>Delaware</option>
-                      <option>Tennessee</option>
-                      <option>Texas</option>
-                      <option>Washington</option>
-                    </select>
-                  </div>
-                  <!-- /.form-group -->
-                  <div class="form-group">
-                    <label>switch por si acaso </label>
-                    <div class="input-group">
-                      <input type="checkbox" name="my-checkbox" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
-                    </div>
-                  </div>
-                  <!-- /.form-group -->
-                </div>
-                <!-- /.col -->
-                <div class="col-md-6">
-                  <div class="form-group">
                     <label>Fecha Inicio</label>
 
                     <div class="input-group">
@@ -149,6 +130,29 @@
                     </div>
                     <!-- /.input group -->
                   </div>
+                  <!-- /.form-group -->
+<!--                   <div class="form-group">
+                    <label>switch por si acaso </label>
+                    <div class="input-group">
+                      <input type="checkbox" name="my-checkbox" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                    </div>
+                  </div> -->
+                  <!-- /.form-group -->
+                </div>
+                <!-- /.col -->
+                <div class="col-md-6">
+<!--                   <div class="form-group">
+                    <label>Minimal</label>
+                    <select class="form-control select2" style="width: 100%;" name="tipoFiltro" id="tipoFiltro">
+                      <option selected="selected">Alabama</option>
+                      <option>Alaska</option>
+                      <option>California</option>
+                      <option>Delaware</option>
+                      <option>Tennessee</option>
+                      <option>Texas</option>
+                      <option>Washington</option>
+                    </select>
+                  </div> -->
                   <!-- /.form-group -->
                   <div class="form-group">
                     <label>Fecha término:</label>
@@ -205,27 +209,30 @@
                 <tbody>
                   <?php
                     $nsql= "SELECT DISTINCT
-                    TOP (100) PERCENT dbo.MAEEN.NOKOEN AS RSocial,
-                    dbo.MAEEN.DIEN AS Direccion,
-                    dbo.MAEEN.FOEN AS Telefono,
-                    dbo.MAEEN.KOEN AS Rut,
-                    dbo.MAEEN.EMAIL AS Email,
-                    dbo.MAEEDO.TIDO AS Tipo,
-                    dbo.MAEEDO.NUDO AS Numero,
-                    dbo.MAEEDO.FEEMDO AS Fecha,
-                    dbo.MAEEDO.ESPGDO AS Estado,
-                    dbo.MAEVEN.FEVE AS FVencimiento,
-                    dbo.MAEVEN.ESPGVE, dbo.MAEEDO.VABRDO AS valorCompra,
-                    dbo.MAEVEN.VAVE AS VCuota,
-                    dbo.MAEVEN.VAABVE AS Abono,
-                    dbo.MAEVEN.VAVE - dbo.MAEVEN.VAABVE AS valorCuotaPagar
-              FROM dbo.MAEEDO
-              INNER JOIN dbo.MAEEN ON dbo.MAEEDO.ENDO = dbo.MAEEN.KOEN AND dbo.MAEEDO.SUENDO = dbo.MAEEN.SUEN
-              RIGHT OUTER JOIN dbo.MAEVEN ON dbo.MAEEDO.IDMAEEDO = dbo.MAEVEN.IDMAEEDO
-              WHERE (dbo.MAEEDO.TIDO IN ('FCV', 'BLV', 'RIN'))
-                AND (dbo.MAEVEN.ESPGVE <> 'C')
-                AND (dbo.MAEVEN.FEVE BETWEEN '$salidafechaIn' AND '$salidafechaOut')
-              ORDER BY Rut, FVencimiento";
+                              TOP (100) PERCENT
+                                dbo.MAEEN.NOKOEN AS RSocial,
+                                dbo.MAEEN.DIEN AS Direccion,
+                                dbo.MAEEN.FOEN AS Telefono,
+                                dbo.MAEEN.KOEN AS Rut,
+                                dbo.MAEEN.EMAIL AS Email,
+                                dbo.MAEEDO.TIDO AS Tipo,
+                                dbo.MAEEDO.NUDO AS Numero,
+                                dbo.MAEEDO.FEEMDO AS Fecha,
+                                dbo.MAEVEN.FEVE AS FVencimiento,
+                                dbo.MAEEDO.ESPGDO AS Estado,
+                                datediff(day,dbo.MAEEDO.FEEMDO,dbo.MAEVEN.FEVE) AS DIAS,
+                                dbo.MAEVEN.ESPGVE, dbo.MAEEDO.VABRDO AS valorCompra,
+                                dbo.MAEVEN.VAVE AS VCuota,
+                                dbo.MAEVEN.VAABVE AS Abono,
+                                dbo.MAEVEN.VAVE - dbo.MAEVEN.VAABVE AS PorPagar
+                            FROM dbo.MAEEDO
+                            INNER JOIN dbo.MAEEN ON dbo.MAEEDO.ENDO = dbo.MAEEN.KOEN AND dbo.MAEEDO.SUENDO = dbo.MAEEN.SUEN
+                            RIGHT OUTER JOIN dbo.MAEVEN ON dbo.MAEEDO.IDMAEEDO = dbo.MAEVEN.IDMAEEDO
+                            WHERE (dbo.MAEEDO.TIDO IN ('FCV', 'BLV', 'RIN'))
+                              AND (dbo.MAEVEN.ESPGVE <> 'C')
+                              AND (dbo.MAEVEN.FEVE BETWEEN '$salidafechaIn' AND '$salidafechaOut')
+                              -- AND dbo.MAEEDO.ENDO='10330844'
+                            ORDER BY Rut, Numero,FVencimiento";
                     $sentencia = $con->prepare($nsql,[
                         PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL,
                     ]);
@@ -252,9 +259,9 @@
                                       <p class="text-center"><strong style="color: red;">$ <?php echo number_format($row['VCuota'],0,",","."); ?></strong></p>
                                     </td>
                                     <td> $ <?php echo number_format($row['Abono'],0,",","."); ?></td>
-                                    <td> $ <?php echo number_format($row['valorCuotaPagar'],0,",","."); ?></td>
+                                    <td> $ <?php echo number_format($row['VCuota'],0,",","."); ?></td>
                                     <td>
-                                      <form action="#" method="post">
+                                      <form action="#" method="POST">
                                         <div class="form-row">
                                           <div class="form-group col-md-12">
                                             <input type="text" class="form-control" id="telefonoContacto" name="telefonoContacto" value="<?php echo trim($row['Telefono']) ?>" placeholder="Telefono">
@@ -271,7 +278,9 @@
                                             <div class="btn-group" role='group'>
                                               <button type="submit" formaction="/deudaPeriodoCliente.php" class="btn btn-danger"><i class="fas fa-file-pdf"></i></button>
                                               <button type="button" class="btn btn-primary" disabled="true"><i class="fas fa-envelope-square"></i></button>
-                                              <button type="button" class="btn btn-success" disabled="true"><i class="fab fa-whatsapp"></i></button>
+                                              <button id="whatsapp" type="submit" class="btn btn-success" formaction="/whatsappCobranza.php">
+                                                <i class="fab fa-whatsapp"></i>
+                                              </button>
                                             </div>
                                           </div>
                                         </div>
@@ -303,9 +312,6 @@
               </table>
             </div>
           </div>
-
-        <!--<div id="tablaDeudores"></div>-->
-
       </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
@@ -436,6 +442,30 @@
       "autoWidth": false,
       "paging": true,
       "searching": true,
+      "language":{
+        "decimal":        "",
+        "emptyTable":     "No hay datos",
+        "info":           "Mostrando _START_ a _END_ de _TOTAL_ registros",
+        "infoEmpty":      "Mostrando 0 a 0 de 0 registros",
+        "infoFiltered":   "(Filtro de _MAX_ total registros)",
+        "infoPostFix":    "",
+        "thousands":      ",",
+        "lengthMenu":     "Mostrar _MENU_ registros",
+        "loadingRecords": "Cargando...",
+        "processing":     "Procesando...",
+        "search":         "Buscar:",
+        "zeroRecords":    "No se encontraron coincidencias",
+        "paginate": {
+          "first":      "Primero",
+          "last":       "Ultimo",
+          "next":       "Próximo",
+          "previous":   "Anterior"
+        },
+      "aria": {
+          "sortAscending":  ": Activar orden de columna ascendente",
+          "sortDescending": ": Activar orden de columna desendente"
+        }
+      }
     });
     $('#example2').DataTable({
       "paging": true,

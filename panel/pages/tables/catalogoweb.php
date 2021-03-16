@@ -120,7 +120,7 @@
 		                    <td><?php echo $producto['sato']?></td>
 		                    <td><?php echo $producto['nombre']?></td>
 		                    <td><?php echo $producto['descripcion']?></td>
-                        <td><?php echo $producto['precioVenta']?></td>
+                        <td><?php echo number_format($producto['precioVenta'],0,',','.');?></td>
 		                </tr>
 	            	<?php
 	            		}

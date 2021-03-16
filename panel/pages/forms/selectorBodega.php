@@ -94,8 +94,8 @@
 							?>
 						</select>
 					</div>
-					<input type="button" value="Listado completo" class="btn btn-success" id="completo" name="completo" onclick="document.formSelector.action = '../tables/productos.php'; document.formSelector.submit();">
-					<input type="button" value="Solo productos con stock" class="btn btn-primary" id="soloStock" name="soloStock" onclick="document.formSelector.action = '../tables/productoStock.php'; document.formSelector.submit();">
+					<input type="button" value="Consulta de stock" class="btn btn-success" id="completo" name="completo" onclick="document.formSelector.action = '../tables/productos.php'; document.formSelector.submit();">
+					<input type="button" value="Seccion catalogo" class="btn btn-primary" id="soloStock" name="soloStock" onclick="document.formSelector.action = '../tables/productoStock.php'; document.formSelector.submit();">
 				</form>
               </div>
               <div class="card-footer bg-danger">

@@ -49,7 +49,6 @@
           return $result=mysqli_query($conexion,$sql);
         }
 
-
         public function agregarCatalogo($datos){
           $c = new Conexion();
           $conexion = $c->conectar();

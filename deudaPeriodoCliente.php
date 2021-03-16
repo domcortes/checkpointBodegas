@@ -185,35 +185,37 @@ $pdf->Cell(35,6,'VALOR CUOTA MES',1,1,'C',0);
 //consultar cuotas
 $montoMes=0;
 $tsql = "SELECT DISTINCT
-                    TOP (100) PERCENT dbo.MAEEN.NOKOEN AS RSocial,
-                    dbo.MAEEN.DIEN AS Direccion,
-                    dbo.MAEEN.FOEN AS Telefono,
-                    dbo.MAEEN.KOEN AS Rut,
-                    dbo.MAEEN.EMAIL AS Email,
-                    dbo.MAEEDO.TIDO AS Tipo,
-                    dbo.MAEEDO.NUDO AS Numero,
-                    dbo.MAEEDO.FEEMDO AS Fecha,
-                    dbo.MAEEDO.ESPGDO AS Estado,
-                    dbo.MAEVEN.FEVE AS FVencimiento,
-                    dbo.MAEVEN.ESPGVE, dbo.MAEEDO.VABRDO AS valorCompra,
-                    dbo.MAEVEN.VAVE AS VCuota,
-                    dbo.MAEVEN.VAABVE AS Abono,
-                    dbo.MAEVEN.VAVE - dbo.MAEVEN.VAABVE AS valorCuotaPagar
-              FROM dbo.MAEEDO
-              INNER JOIN dbo.MAEEN ON dbo.MAEEDO.ENDO = dbo.MAEEN.KOEN AND dbo.MAEEDO.SUENDO = dbo.MAEEN.SUEN
-              RIGHT OUTER JOIN dbo.MAEVEN ON dbo.MAEEDO.IDMAEEDO = dbo.MAEVEN.IDMAEEDO
-              WHERE (dbo.MAEEDO.TIDO IN ('FCV', 'BLV', 'RIN'))
-                AND (dbo.MAEVEN.ESPGVE <> 'C')
-                AND (dbo.MAEEDO.ENDO = '$rutCliente')
-                AND (dbo.MAEVEN.FEVE BETWEEN '$dateStart' AND '$dateEnd')
-              ORDER BY Rut, FVencimiento";
+              TOP (100) PERCENT
+                dbo.MAEEN.NOKOEN AS RSocial,
+                dbo.MAEEN.DIEN AS Direccion,
+                dbo.MAEEN.FOEN AS Telefono,
+                dbo.MAEEN.KOEN AS Rut,
+                dbo.MAEEN.EMAIL AS Email,
+                dbo.MAEEDO.TIDO AS Tipo,
+                dbo.MAEEDO.NUDO AS Numero,
+                dbo.MAEEDO.FEEMDO AS Fecha,
+                dbo.MAEVEN.FEVE AS FVencimiento,
+                dbo.MAEEDO.ESPGDO AS Estado,
+                datediff(day,dbo.MAEEDO.FEEMDO,dbo.MAEVEN.FEVE) AS DIAS,
+                dbo.MAEVEN.ESPGVE, dbo.MAEEDO.VABRDO AS valorCompra,
+                dbo.MAEVEN.VAVE AS VCuota,
+                dbo.MAEVEN.VAABVE AS Abono,
+                dbo.MAEVEN.VAVE - dbo.MAEVEN.VAABVE AS PorPagar
+            FROM dbo.MAEEDO
+            INNER JOIN dbo.MAEEN ON dbo.MAEEDO.ENDO = dbo.MAEEN.KOEN AND dbo.MAEEDO.SUENDO = dbo.MAEEN.SUEN
+            RIGHT OUTER JOIN dbo.MAEVEN ON dbo.MAEEDO.IDMAEEDO = dbo.MAEVEN.IDMAEEDO
+            WHERE (dbo.MAEEDO.TIDO IN ('FCV', 'BLV', 'RIN'))
+              AND (dbo.MAEVEN.ESPGVE <> 'C')
+              AND (dbo.MAEVEN.FEVE BETWEEN '$startDateSQL' AND '$endDateSQL')
+              AND dbo.MAEEDO.ENDO='$rutCliente'
+            ORDER BY Rut, Numero,FVencimiento";
 $sentencia3 = $con->prepare($tsql,[
   PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL,
 ]);
 $sentencia3->execute();
 
 while ($row = $sentencia3->fetch(PDO::FETCH_ASSOC)) {
-  $montoMes = $montoMes+$row['valorCuotaPagar'];
+  $montoMes = $montoMes+$row['PorPagar'];
   $pdf->Cell(40,6,$row['Tipo'].' '.$row['Numero'],1,0,'C',0);
     $fecha = new DateTime($row['Fecha']);
   $pdf->Cell(30,6,$fecha->format('d/m/Y'),1,0,'C',0);
@@ -221,12 +223,15 @@ while ($row = $sentencia3->fetch(PDO::FETCH_ASSOC)) {
   $pdf->Cell(30,6,$FVencimiento->format('d/m/Y'),1,0,'C',0);
   $pdf->Cell(30,6,'$'.number_format($row['VCuota'],0,",","."),1,0,'C',0);
   $pdf->Cell(30,6,'$'.number_format($row['Abono'],0,",","."),1,0,'C',0);
-  $pdf->Cell(35,6,'$'.number_format($row['valorCuotaPagar'],0,",","."),1,1,'C',0);
+  $pdf->Cell(35,6,'$'.number_format($row['PorPagar'],0,",","."),1,1,'C',0);
 }
 
 $totalFacturado = $montoMes;
 
-$pdf->Ln(15);
+$pdf->SetFont('Arial','B',12);
+$pdf->Cell(160,6,'MONTO TOTAL PERIODO FACTURADO: ',1,0,'R',0);
+$pdf->Cell(35,6,'$'.number_format($totalFacturado,0,",","."),1,1,'C',0);
+$pdf->Ln(10);
 $pdf->SetFont('Arial','B',8);
 $pdf->Cell(195,6,'III. PROXIMOS VENCIMIENTOS',1,1,'C',true);
 $pdf->Ln(2);
@@ -311,13 +316,6 @@ $dateEndNext = $lastDayNext.'-'.$nextMonth.'-'.$year;
 
 $pdf->Cell(25,6,$dateStartNext,1,0,'C',0);
 $pdf->Cell(25,6,$dateEndNext,1,0,'C',0);
-
-
-
-$pdf->Ln(20);
-$pdf->SetFont('Arial','B',12);
-$pdf->Cell(160,6,'MONTO TOTAL PERIODO FACTURADO: ',1,0,'R',0);
-$pdf->Cell(35,6,'$'.number_format($totalFacturado,0,",","."),1,1,'C',0);
 
 $sentencia = null;
 $sentencia2 = null;
