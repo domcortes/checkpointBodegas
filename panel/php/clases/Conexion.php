@@ -1,10 +1,10 @@
 <?php
     class Conexion {
         private $servidor="localhost";
-        /*private $usuario="intranet";
-        private $password="qwertyQXE59oplm%";*/
-        private $usuario="root";
-        private $password="martin07081988";
+        private $usuario="intranet";
+        private $password="qwertyQXE59oplm%";
+        // private $usuario="root";
+        // private $password="martin07081988";
         private $bd="accesoBodega";
 //
         public function conectar(){
