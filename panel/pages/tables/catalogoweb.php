@@ -306,8 +306,20 @@
 </script>
 <script>
   $("#calsel").change(function(){
-    var categoria = document.getElementById("calsel").value;
-    console.log(categoria);
+    var catalogo = document.getElementById("calsel").value;
+    var fd = new FormData();
+    fd.append('idCatalogo', catalogo);
+    $.ajax({
+      //cargar archivo de procesamiento ajax
+      url:"",
+      method:"POST",
+      data:fd,
+      cache:false,
+      contentType:false,
+      processData:false,
+      success:function(respuesta){
+        //insertar resultados como tabla completa
+      }
   })
 </script>
 </body>
