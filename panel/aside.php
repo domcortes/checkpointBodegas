@@ -136,6 +136,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                 <a href="/panel/pages/tables/listaCatalogos.php" class="nav-link">
+                  <i class="fas fa-file-invoice"></i>
+                  <p>Listado de catalogos</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="/panel/pages/tables/catalogoweb.php" class="nav-link">
                   <i class="fas fa-file-invoice"></i>
                   <p>Previsualizacion catalogo</p>
