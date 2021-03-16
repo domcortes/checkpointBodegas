@@ -95,8 +95,28 @@
         <!-- /.card -->
         <div class="card card-success">
           <div class="card-header">
-            <h3 class="card-title">LISTADO DE PRODUCTO DE CATALOGO</h3>
+            <h3 class="card-title">SELECCIONE CATALOGO</h3>
+          </div>
+          <div class="card-body">
+            <select name="calsel" id="calsel" class="form-control">
+              <option value="">Seleccione una opcion</option>
+              <?php
+                $listaCatalogos = new metodos();
+                $sqlCatalogos = "SELECT * FROM catalogo where vigente='si'";
+                $catalogos = $listaCatalogos->mostrarDatos($sqlCatalogos);
+                foreach ($catalogos as $catalogo) {
+              ?>
+                <option value="<?php echo $catalogo['idCatalogo'];?>"><?php echo $catalogo['nombreCatalogo'];?></option>
+              <?php
+                }
+              ?>
+            </select>
+          </div>
+        </div>
 
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">LISTADO DE PRODUCTO DE CATALOGO</h3>
           </div>
             <div class="card-body">
               <table id="example1" class="table table-bordered table-striped">
@@ -141,9 +161,7 @@
               </table>
             </div>
           </div>
-
         <!--<div id="tablaDeudores"></div>-->
-
       </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
