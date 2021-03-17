@@ -1,6 +1,6 @@
 <?php
 	if (isset($_POST['idCatalogo'])) {
-		echo "<div class='card card-primary'>
+		$tabla = "<div class='card card-primary'>
           <div class='card-header'>
             <h3 class='card-title'>LISTADO DE PRODUCTO DE CATALOGO</h3>
           </div>
@@ -41,5 +41,7 @@
           </div>
       </div>";
 	}
+
+	echo $tabla;
 
 ?>
