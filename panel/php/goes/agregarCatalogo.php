@@ -52,8 +52,8 @@ if (isset($_POST['catalogo'])) {
 			echo "<script>
 					Swal.fire({
 					  icon: 'error',
-					  title: 'Ups!',
-					  text: 'No se pudo agregar al catalogo!',
+					  title: 'Ups! Error al agregar',
+					  text: 'Error ".$imagen."',
 					})
 				</script>";
 		}
