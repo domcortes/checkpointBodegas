@@ -31,7 +31,7 @@ if (isset($_POST['catalogo'])) {
 		$idUsuario = "1";
 
 
-		echo $imagen.'<br>';
+		// echo $imagen.'<br>';
 		// https://drive.google.com/file/d/1hCdO_f3RNKSgTkTxWl3HdXPw5EUmCdUv/view?usp=sharing
 		echo '<script>alert('.substr($imagen, 32).');</script>';
 
