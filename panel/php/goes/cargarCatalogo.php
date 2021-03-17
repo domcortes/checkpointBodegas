@@ -16,7 +16,8 @@
                     <th>Precio Venta</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody>";
+        $tabla.="
 	                <tr>
 	                    <td><p class='text-center'>nombre catalogo</p></td>
 	                    <td><img class='img-thumbnail' src='' alt='' width='50%' height='40%'></td>
@@ -24,8 +25,8 @@
 	                    <td>nombre</td>
 	                    <td>descripcion del producto</td>
                     <td>precio venta</td>
-	                </tr>
-                </tbody>
+	                </tr>";
+        $tabla.="</tbody>
                 <tfoot>
                   <tr>
                     <th>Nombre catalogo</th>
