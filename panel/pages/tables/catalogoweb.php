@@ -98,7 +98,6 @@
           </div>
         </div>
         <div id="productosCatalogo">
-
         </div>
     </section>
     <!-- /.content -->

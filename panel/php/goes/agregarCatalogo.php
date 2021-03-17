@@ -30,32 +30,37 @@ if (isset($_POST['catalogo'])) {
 		$sato = $_POST['sato'];
 		$idUsuario = "1";
 
-		$datos = array(
-						$catalogo,
-						$imagen,
-						$sato,
-						$nombre,
-						$descripcion,
-						$precioVenta,
-						$idUsuario
-					);
-		$obj = new metodosTeleventaLocal();
-		if ($obj->agregarCatalogo($datos)) {
-			echo "<script>
-					Swal.fire({
-					  icon: 'success',
-					  title: 'Excelente!',
-					  text: 'Agregaste este producto al catalogo!',
-					})
-				</script>";
-		} else {
-			echo "<script>
-					Swal.fire({
-					  icon: 'error',
-					  title: 'Ups! Error al agregar',
-					  text: 'Error ".$imagen."',
-					})
-				</script>";
-		}
+
+		echo $imagen.'<br>';
+		// https://drive.google.com/file/d/1hCdO_f3RNKSgTkTxWl3HdXPw5EUmCdUv/view?usp=sharing
+		echo substr($imagen, 32);
+
+		// $datos = array(
+		// 				$catalogo,
+		// 				$imagen,
+		// 				$sato,
+		// 				$nombre,
+		// 				$descripcion,
+		// 				$precioVenta,
+		// 				$idUsuario
+		// 			);
+		// $obj = new metodosTeleventaLocal();
+		// if ($obj->agregarCatalogo($datos)) {
+		// 	echo "<script>
+		// 			Swal.fire({
+		// 			  icon: 'success',
+		// 			  title: 'Excelente!',
+		// 			  text: 'Agregaste este producto al catalogo!',
+		// 			})
+		// 		</script>";
+		// } else {
+		// 	echo "<script>
+		// 			Swal.fire({
+		// 			  icon: 'error',
+		// 			  title: 'Ups! Error al agregar',
+		// 			  text: 'No se pudo agregar al catalogo!',
+		// 			})
+		// 		</script>";
+		// }
 	}
 }
