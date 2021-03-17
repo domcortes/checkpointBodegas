@@ -113,57 +113,9 @@
             </select>
           </div>
         </div>
-        <div id="productosCatalogo"></div>
+        <div id="productosCatalogo">
 
-        <div class="card card-primary">
-          <div class="card-header">
-            <h3 class="card-title">LISTADO DE PRODUCTO DE CATALOGO</h3>
-          </div>
-            <div class="card-body">
-              <table id="example1" class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                    <th>Nombre catalogo</th>
-                    <th>Foto</th>
-                    <th>Sato</th>
-                    <th>Nombre</th>
-                    <th>Descripcion</th>
-                    <th>Precio Venta</th>
-                  </tr>
-                </thead>
-                <tbody>
-                	<?php
-                		foreach ($productos as $producto) {
-                	?>
-		                <tr>
-		                    <td><p class="text-center"><?php echo $producto['nombreCatalogo'];?></p></td>
-		                    <td><img class="img-thumbnail" src="<?php echo $producto['imagen']?>" alt="" width="50%" height="40%"></td>
-		                    <td><?php echo $producto['sato']?></td>
-		                    <td><?php echo $producto['nombre']?></td>
-		                    <td><?php echo $producto['descripcion']?></td>
-                        <td><?php echo number_format($producto['precioVenta'],0,',','.');?></td>
-		                </tr>
-	            	<?php
-	            		}
-						$sentencia2 = null;
-						$con = null;
-	            	?>
-                </tbody>
-                <tfoot>
-                  <tr>
-                    <th>Nombre catalogo</th>
-                    <th>Foto</th>
-                    <th>Sato</th>
-                    <th>Nombre</th>
-                    <th>Descripcion</th>
-                    <th>Precio Venta</th>
-                  </tr>
-                </tfoot>
-              </table>
-            </div>
-          </div>
-        <!--<div id="tablaDeudores"></div>-->
-      </div><!-- /.container-fluid -->
+        </div>
     </section>
     <!-- /.content -->
   </div>
