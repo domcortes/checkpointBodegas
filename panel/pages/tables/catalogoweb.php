@@ -113,6 +113,7 @@
             </select>
           </div>
         </div>
+        <div id="productosCatalogo"></div>
 
         <div class="card card-primary">
           <div class="card-header">
@@ -311,14 +312,14 @@
     fd.append('idCatalogo', catalogo);
     $.ajax({
       //cargar archivo de procesamiento ajax
-      url:"",
+      url:"../../php/goes/cargarCatalogo.php",
       method:"POST",
       data:fd,
       cache:false,
       contentType:false,
       processData:false,
       success:function(respuesta){
-        //insertar resultados como tabla completa
+        $('#productosCatalogo').html(respuesta);
       }
   })
 </script>
