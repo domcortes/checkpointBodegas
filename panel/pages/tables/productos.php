@@ -163,10 +163,10 @@ if (!$_SESSION['verificar']) {
                                     <option value="<?php echo $catalogo['idCatalogo'] ?>"><?php echo $catalogo['nombreCatalogo'] ?></option>
                                 <?php } ?>
                             </select>
-                            <input type="text" value="<?php echo $row['Bodega'] ?>" id='<?php echo "bodega" . $count; ?>' name="bodega<?php echo $count;?>">
-                            <input type="text" value="<?php echo $row['SKU']; ?>" id="sato<?php echo $count;?>" name="sato<?php echo $count;?>">
-                            <input type="text" value="<?php echo $row['DESCRIPCION']; ?>" id="nombre<?php echo $count;?>" name="nombre<?php echo $count;?>">
-                            <input type="text" value="0" id="precioVenta<?php echo $count;?>" name="precioVenta<?php echo $count;?>">
+                            <input type="hidden" value="<?php echo $row['Bodega'] ?>" id='<?php echo "bodega" . $count; ?>' name="bodega<?php echo $count;?>">
+                            <input type="hidden" value="<?php echo $row['SKU']; ?>" id="sato<?php echo $count;?>" name="sato<?php echo $count;?>">
+                            <input type="hidden" value="<?php echo $row['DESCRIPCION']; ?>" id="nombre<?php echo $count;?>" name="nombre<?php echo $count;?>">
+                            <input type="hidden" value="0" id="precioVenta<?php echo $count;?>" name="precioVenta<?php echo $count;?>">
                             <input type="button" onclick="realizaProceso(<?php echo $count;?>)" value="Sumar a catalogo" class="btn btn-success btn-block">
                         </td>
                       </form>
