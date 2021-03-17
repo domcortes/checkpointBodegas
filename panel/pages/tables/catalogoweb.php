@@ -3,7 +3,6 @@
 	if (!$_SESSION['verificar']) {
 		header('');
 	} else {
-
 			ob_start();
 			require_once("../../php/clases/Conexion.php");
 			require_once("../../php/clases/cc2.php");
@@ -256,7 +255,6 @@
       contentType:false,
       processData:false,
       success:function(respuesta){
-        console.log(respuesta);
         console.log(catalogo);
         $('#productosCatalogo').html(respuesta);
       }
