@@ -23,7 +23,6 @@
                     <th>Sato</th>
                     <th>Nombre</th>
                     <th>Descripcion</th>
-                    <th>Precio Venta</th>
                   </tr>
                 </thead>
                 <tbody>";
@@ -36,7 +35,6 @@
 	                    <td>".$catalogo['sato']."</td>
 	                    <td>".$catalogo['nombre']."</td>
 	                    <td>".$catalogo['descripcion']."</td>
-	                	<td>".$catalogo['precioVenta']."</td>
 	                </tr>";
 	        }
         } else {
@@ -51,7 +49,6 @@
                     <th>Sato</th>
                     <th>Nombre</th>
                     <th>Descripcion</th>
-                    <th>Precio Venta</th>
                   </tr>
                 </tfoot>
               </table>
