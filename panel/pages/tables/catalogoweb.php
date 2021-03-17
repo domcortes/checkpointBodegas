@@ -13,22 +13,7 @@
 			$rolUsuario = $_SESSION['nivelAcceso'];
       $lista = new metodos();
       $sqlProductos =
-        "SELECT
-          productosCatalogo.id_catalogo,
-          catalogo.nombreCatalogo AS nombreCatalogo,
-          productosCatalogo.imagen,
-          productosCatalogo.sato,
-          productosCatalogo.nombre,
-          productosCatalogo.descripcion,
-          productosCatalogo.precioVenta
-        FROM
-          productosCatalogo
-        INNER JOIN
-          catalogo
-        ON
-          productosCatalogo.id_catalogo = catalogo.idCatalogo
-        ORDER BY
-          id";
+        "SELECT productosCatalogo.id_catalogo,catalogo.nombreCatalogo AS nombreCatalogo,productosCatalogo.imagen,productosCatalogo.sato,productosCatalogo.nombre,productosCatalogo.descripcion,productosCatalogo.precioVenta FROM productosCatalogo INNER JOIN catalogo ON productosCatalogo.id_catalogo = catalogo.idCatalogo ORDER BY id";
       $productos = $lista->mostrarDatos($sqlProductos);
 
 	}
