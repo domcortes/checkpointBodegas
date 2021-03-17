@@ -319,6 +319,8 @@
       contentType:false,
       processData:false,
       success:function(respuesta){
+        console.log(respuesta);
+        console.log(catalogo);
         $('#productosCatalogo').html(respuesta);
       }
   })
