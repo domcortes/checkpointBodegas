@@ -1,5 +1,26 @@
 <?php
 	if (isset($_POST['idCatalogo'])) {
+		require_once("../../php/clases/cc2.php");
+		$lista = new metodos();
+		$sqlProductos =
+			"SELECT
+			productosCatalogo.id_catalogo,
+			catalogo.nombreCatalogo AS nombreCatalogo,
+			productosCatalogo.imagen,
+			productosCatalogo.sato,
+			productosCatalogo.nombre,
+			productosCatalogo.descripcion,
+			productosCatalogo.precioVenta
+			FROM
+			productosCatalogo
+			INNER JOIN
+			catalogo
+			ON
+			productosCatalogo.id_catalogo = catalogo.idCatalogo
+			ORDER BY
+			id";
+		$productos = $lista->mostrarDatos($sqlProductos);
+
 		$tabla = "<div class='card card-primary'>
           <div class='card-header'>
             <h3 class='card-title'>LISTADO DE PRODUCTO DE CATALOGO</h3>
@@ -17,15 +38,18 @@
                   </tr>
                 </thead>
                 <tbody>";
-        $tabla.="
-	                <tr>
-	                    <td><p class='text-center'>nombre catalogo</p></td>
-	                    <td><img class='img-thumbnail' src='' alt='' width='50%' height='40%'></td>
-	                    <td>sato</td>
-	                    <td>nombre</td>
-	                    <td>descripcion del producto</td>
-                    <td>precio venta</td>
-	                </tr>";
+        foreach ($productos as $producto) {
+	        $tabla.="
+	            <tr>
+	                <td><p class='text-center'>".$producto['nombreCatalogo']."</p></td>
+	                <td><img class='img-thumbnail' src='".$producto['imagen']."' alt='' width='50%' height='40%'></td>
+	                <td>".$producto['sato']."</td>
+	                <td>".$producto['nombre']."</td>
+	                <td>".$producto['descripcion']."</td>
+	            	<td>".$producto['precioVenta']."</td>
+	            </tr>";
+        }
+
         $tabla.="</tbody>
                 <tfoot>
                   <tr>
