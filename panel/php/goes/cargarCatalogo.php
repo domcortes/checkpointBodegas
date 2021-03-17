@@ -7,7 +7,7 @@
 		// require_once("../../php/clases/crud.php");
       	$lista = new metodos();
       	$sqlCatalogo =
-        "SELECT productosCatalogo.id_catalogo,catalogo.nombreCatalogo AS nombreCatalogo,productosCatalogo.imagen,productosCatalogo.sato,productosCatalogo.nombre,productosCatalogo.descripcion,productosCatalogo.precioVenta FROM productosCatalogo INNER JOIN catalogo ON productosCatalogo.id_catalogo = catalogo.idCatalogo ORDER BY id";
+        "SELECT productosCatalogo.id_catalogo,catalogo.nombreCatalogo AS nombreCatalogo,productosCatalogo.imagen,productosCatalogo.sato,productosCatalogo.nombre,productosCatalogo.descripcion,productosCatalogo.precioVenta FROM productosCatalogo INNER JOIN catalogo ON productosCatalogo.id_catalogo = catalogo.idCatalogo WHERE productosCatalogo.id_catalogo = '$catalogo' ORDER BY id";
       	$catalogos = $lista->mostrarDatos($sqlCatalogo);
 
 		$tabla = "<div class='card card-primary'>
