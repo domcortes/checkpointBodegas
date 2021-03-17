@@ -40,7 +40,7 @@
 	                </tr>";
 	        }
         } else {
-        	echo "<tr><td colspan='6'>No existen registros asociados</td><tr>";
+        	$tabla .= "<tr><td colspan='6'>No existen registros asociados</td><tr>";
         }
 
         $tabla.="</tbody>
