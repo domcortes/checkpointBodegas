@@ -323,6 +323,7 @@
         console.log(catalogo);
         $('#productosCatalogo').html(respuesta);
       }
+    })
   })
 </script>
 </body>
