@@ -38,17 +38,17 @@
                   </tr>
                 </thead>
                 <tbody>";
-        foreach ($productos as $producto) {
-	        $tabla.="
-	            <tr>
-	                <td><p class='text-center'>".$producto['nombreCatalogo']."</p></td>
-	                <td><img class='img-thumbnail' src='".$producto['imagen']."' alt='' width='50%' height='40%'></td>
-	                <td>".$producto['sato']."</td>
-	                <td>".$producto['nombre']."</td>
-	                <td>".$producto['descripcion']."</td>
-	            	<td>".$producto['precioVenta']."</td>
-	            </tr>";
-        }
+        // foreach ($productos as $producto) {
+	       //  $tabla.="
+	       //      <tr>
+	       //          <td><p class='text-center'>".$producto['nombreCatalogo']."</p></td>
+	       //          <td><img class='img-thumbnail' src='".$producto['imagen']."' alt='' width='50%' height='40%'></td>
+	       //          <td>".$producto['sato']."</td>
+	       //          <td>".$producto['nombre']."</td>
+	       //          <td>".$producto['descripcion']."</td>
+	       //      	<td>".$producto['precioVenta']."</td>
+	       //      </tr>";
+        // }
 
         $tabla.="</tbody>
                 <tfoot>
