@@ -1,10 +1,10 @@
 <?php
 	if (isset($_POST['idCatalogo'])) {
-		require_once("../clases/cc2.php");
-		$lista = new metodos();
-		$sqlProductos =
-			"SELECT productosCatalogo.id_catalogo,catalogo.nombreCatalogo AS nombreCatalogo,productosCatalogo.imagen,productosCatalogo.sato,productosCatalogo.nombre,productosCatalogo.descripcion,productosCatalogo.precioVenta FROM productosCatalogo INNER JOIN catalogo ON productosCatalogo.id_catalogo = catalogo.idCatalogo ORDER BY id";
-		try {
+		// require_once("../clases/cc2.php");
+		// $lista = new metodos();
+		// $sqlProductos =
+		// 	"SELECT productosCatalogo.id_catalogo,catalogo.nombreCatalogo AS nombreCatalogo,productosCatalogo.imagen,productosCatalogo.sato,productosCatalogo.nombre,productosCatalogo.descripcion,productosCatalogo.precioVenta FROM productosCatalogo INNER JOIN catalogo ON productosCatalogo.id_catalogo = catalogo.idCatalogo ORDER BY id";
+		// try {
 			$productos = $lista->mostrarDatos($sqlProductos);
 			$tabla = "
 				<div class='card card-primary'>
@@ -52,11 +52,11 @@
 		          </div>
 		      </div>";
 		    echo $tabla;
-		} catch (Exception $e) {
-			echo "excepcion ".$e;
-		}
-	} else {
-		echo "sin resultados";
+	// 	} catch (Exception $e) {
+	// 		echo "excepcion ".$e;
+	// 	}
+	// } else {
+	// 	echo "sin resultados";
 	}
 
 
