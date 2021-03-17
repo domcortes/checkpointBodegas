@@ -33,7 +33,10 @@ if (isset($_POST['catalogo'])) {
 
 		// echo $imagen.'<br>';
 		// https://drive.google.com/file/d/1hCdO_f3RNKSgTkTxWl3HdXPw5EUmCdUv/view?usp=sharing
-		echo substr($imagen, 32);
+		$array = explode('/', $imagen);
+		foreach ($array as $key => $value) {
+			echo $value.' ';
+		}
 
 		// $datos = array(
 		// 				$catalogo,
