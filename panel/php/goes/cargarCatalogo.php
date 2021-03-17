@@ -27,18 +27,21 @@
                   </tr>
                 </thead>
                 <tbody>";
-        foreach ($catalogos as $catalogo) {
-        	$tabla.="
-                <tr>
-                    <td><p class='text-center'>".$catalogo['nombreCatalogo']."</p></td>
-                    <td><img class='img-thumbnail' src='".$catalogo['imagen']."' alt='' width='50%' height='40%'></td>
-                    <td>".$catalogo['sato']."</td>
-                    <td>".$catalogo['nombre']."</td>
-                    <td>".$catalogo['descripcion']."</td>
-                	<td>".$catalogo['precioVenta']."</td>
-                </tr>";
+        if (sizeof($catalogos)>0) {
+        	foreach ($catalogos as $catalogo) {
+	        	$tabla.="
+	                <tr>
+	                    <td><p class='text-center'>".$catalogo['nombreCatalogo']."</p></td>
+	                    <td><img class='img-thumbnail' src='".$catalogo['imagen']."' alt='' width='50%' height='40%'></td>
+	                    <td>".$catalogo['sato']."</td>
+	                    <td>".$catalogo['nombre']."</td>
+	                    <td>".$catalogo['descripcion']."</td>
+	                	<td>".$catalogo['precioVenta']."</td>
+	                </tr>";
+	        }
+        } else {
+        	echo "<tr><td colspan='6'>No existen registros asociados</td><tr>";
         }
-
 
         $tabla.="</tbody>
                 <tfoot>
