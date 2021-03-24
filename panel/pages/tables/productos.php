@@ -38,7 +38,7 @@ if (!$_SESSION['verificar']) {
                 dbo.TABPRE ON dbo.MAEST.KOPR = dbo.TABPRE.KOPR
               WHERE (dbo.MAEST.KOBO = '$bodega')
               AND
-                (dbo.MAEST.STFI1 > 3)";
+                (dbo.MAEST.STFI1 >= 3)";
     $sentencia2 = $con->prepare($tsql, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL,]);
     $sentencia2->execute();
     $dataClient = $sentencia2->fetch(PDO::FETCH_ASSOC);
