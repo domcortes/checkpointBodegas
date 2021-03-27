@@ -22,6 +22,9 @@
 
         $salidafechaIn = $aaaaStart.$mmStart.$ddStart;
         $salidafechaOut = $aaaaEnd.$mmEnd.$ddEnd;
+
+        echo $salidafechaIn;
+        echo $salidafechaOut;
       } else {
         $fecha = new DateTime();
         $fecha->modify('first day of this month');
