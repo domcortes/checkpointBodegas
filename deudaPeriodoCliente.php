@@ -326,6 +326,21 @@ $con = null;
 
 //pagina con los datos de transferencia
 $pdf->AddPage();
+//tabla presentacion cliente
+  $pdf->Cell(195,6,'FORMAS DE PAGO',1,1,'C',0);
+  $pdf->Cell(195,6,'Transferencia Bancaria',1,1,'C',0);
+  $pdf->Cell(45,6,'Nombre Titular',1,0,'L',0);
+  $pdf->Cell(150,6,'Comercial Chelech S.A.',1,1,'L',0);
+  $pdf->Cell(45,6,'Banco',1,0,'L',0);
+  $pdf->Cell(150,6,'Santander',1,1,'L',0);
+  $pdf->Cell(45,6,'Rut Titular',1,0,'L',0);
+  $pdf->Cell(150,6,'76.415.150-K',1,1,'L',0);
+  $pdf->Cell(45,6,'Correo electronico',1,0,'L',0);
+  $pdf->Cell(150,6,'',1,1,'L',0);
+  $pdf->Cell(45,6,'Número de cuenta',1,0,'L',0);
+  $pdf->Cell(150,6,'052-77-698',1,0,'L',0);
+//-fin tabla presentacion cliente
+  $pdf->Ln(15);
 
 
 $pdf->Output('d','Cartola cliente '.$datosCliente['RSocial'].' periodo '.$dateFileNameIn.' al '.$dateFileNameOut.'.pdf', true);
