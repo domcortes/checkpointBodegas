@@ -236,7 +236,6 @@
                         PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL,
                     ]);
                     $sentencia->execute();
-                    var_dump($sentencia);
                     if (sizeof($sentencia->fetch(PDO::FETCH_ASSOC))>0) {
                       $row = $sentencia->fetch(PDO::FETCH_ASSOC);
                       var_dump($row);
