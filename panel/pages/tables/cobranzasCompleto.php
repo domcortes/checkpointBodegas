@@ -209,7 +209,6 @@
                 <tbody>
                   <?php
                     $nsql= "SELECT DISTINCT
-                              TOP (100) PERCENT
                                 dbo.MAEEN.NOKOEN AS RSocial,
                                 dbo.MAEEN.DIEN AS Direccion,
                                 dbo.MAEEN.FOEN AS Telefono,
