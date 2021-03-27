@@ -236,8 +236,8 @@
                         PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL,
                     ]);
                     $sentencia->execute();
-                    foreach ($sentencia->fetch(PDO::FETCH_ASSOC) as $key=>$row) {
-                      echo $key.'-->'.$row;
+                    while ($sentencia->fetch(PDO::FETCH_ASSOC)) {
+
                             $fecha = new DateTime($row['Fecha']);
                             $fechaVencimiento = new DateTime($row['FVencimiento']);
                     ?>
