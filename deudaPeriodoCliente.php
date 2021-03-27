@@ -323,5 +323,10 @@ $sentencia3 = null;
 $sentencia4 = null;
 
 $con = null;
+
+//pagina con los datos de transferencia
+$pdf->AddPage();
+
+
 $pdf->Output('d','Cartola cliente '.$datosCliente['RSocial'].' periodo '.$dateFileNameIn.' al '.$dateFileNameOut.'.pdf', true);
 ?>
