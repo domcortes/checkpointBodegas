@@ -236,9 +236,8 @@
                         PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL,
                     ]);
                     $sentencia->execute();
-
-                      while ($row = $sentencia->fetch(PDO::FETCH_ASSOC)) {
-                        var_dump($sentencia->fetch(PDO::FETCH_ASSOC));
+                    var_dump($sentencia->fetch(PDO::FETCH_ASSOC));
+                    while ($row = $sentencia->fetch(PDO::FETCH_ASSOC)) {
                             $fecha = new DateTime($row['Fecha']);
                             $fechaVencimiento = new DateTime($row['FVencimiento']);
                     ?>
