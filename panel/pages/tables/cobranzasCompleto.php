@@ -237,6 +237,9 @@
                     ]);
                     $sentencia->execute();
                     foreach ($sentencia->fetch(PDO::FETCH_ASSOC) as $row) {
+                      echo '<pre>';
+                      var_dump($row);
+                      echo '</pre>';
                             $fecha = new DateTime($row['Fecha']);
                             $fechaVencimiento = new DateTime($row['FVencimiento']);
                     ?>
