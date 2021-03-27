@@ -327,7 +327,7 @@ $con = null;
 //pagina con los datos de transferencia
 $pdf->AddPage();
 //tabla presentacion cliente
-  $pdf->SetFont('Arial','B',25);
+  $pdf->SetFont('Arial','B',15);
   $pdf->Cell(195,6,'FORMAS DE PAGO',1,1,'C',0);
   $pdf->SetFont('Arial','i',15);
   $pdf->Cell(195,6,'Transferencia Bancaria',1,1,'C',0);
