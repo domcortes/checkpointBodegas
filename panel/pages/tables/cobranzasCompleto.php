@@ -229,9 +229,9 @@
                             INNER JOIN dbo.MAEEN ON dbo.MAEEDO.ENDO = dbo.MAEEN.KOEN AND dbo.MAEEDO.SUENDO = dbo.MAEEN.SUEN
                             RIGHT OUTER JOIN dbo.MAEVEN ON dbo.MAEEDO.IDMAEEDO = dbo.MAEVEN.IDMAEEDO
                             WHERE (dbo.MAEEDO.TIDO IN ('FCV', 'BLV', 'RIN'))
-                              -- AND (dbo.MAEVEN.ESPGVE <> 'C')
+                              AND (dbo.MAEVEN.ESPGVE <> 'C')
                               AND (dbo.MAEVEN.FEVE BETWEEN '$salidafechaIn' AND '$salidafechaOut')
-                              -- AND dbo.MAEEDO.ENDO='10330844'
+                              AND dbo.MAEEDO.ENDO='10330844'
                             ORDER BY Rut, Numero,FVencimiento";
                     $sentencia = $con->prepare($nsql,[
                         PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL,
