@@ -276,7 +276,7 @@
                                           <div class="form-group col-md-12 align-content-center">
                                             <div class="btn-group" role='group'>
                                               <button type="submit" formaction="/deudaPeriodoCliente.php" class="btn btn-danger"><i class="fas fa-file-pdf"></i></button>
-                                              <button type="button" class="btn btn-primary" disabled="true"><i class="fas fa-envelope-square"></i></button>
+                                              <button type="submit" formaction="/deudaPeriodoClienteMail.php" class="btn btn-primary"><i class="fas fa-envelope-square"></i></button>
                                               <!-- <button id="whatsapp" type="submit" class="btn btn-success" formaction="/whatsappCobranza.php">
                                                 <i class="fab fa-whatsapp"></i>
                                               </button> -->
