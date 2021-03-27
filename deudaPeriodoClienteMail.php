@@ -392,7 +392,11 @@ $body .= "--".$separator."--";
 
 // send message
 try {
-  mail($to, $subject, $body, $headers);
+  if (mail($to, $subject, $body, $headers)) {
+    echo 'enviado';
+  } else {
+    echo 'no enviado';
+  }
 } catch (Exception $e) {
   echo $e;
 }
