@@ -238,6 +238,8 @@
                     $sentencia->execute();
                     var_dump($sentencia);
                     if (sizeof($sentencia->fetch(PDO::FETCH_ASSOC))>0) {
+                      $row = $sentencia->fetch(PDO::FETCH_ASSOC);
+                      var_dump($row);
                       while ($row = $sentencia->fetch(PDO::FETCH_ASSOC)) {
                             $fecha = new DateTime($row['Fecha']);
                             $fechaVencimiento = new DateTime($row['FVencimiento']);
