@@ -391,6 +391,10 @@ $body .= $attachment.$eol;
 $body .= "--".$separator."--";
 
 // send message
-mail($to, $subject, $body, $headers);
+if (mail($to, $subject, $body, $headers)) {
+  echo 'enviado';
+} else {
+  echo 'no enviado';
+}
 
 ?>
