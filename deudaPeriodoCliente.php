@@ -342,7 +342,7 @@ $pdf->AddPage();
   $pdf->Cell(45,6,'Correo electronico',1,0,'L',0);
   $pdf->Cell(150,6,'pagos@chelech.cl',1,1,'L',0);
   $pdf->Cell(45,6,'Numero de cuenta',1,0,'L',0);
-  $pdf->Cell(150,6,'052-77-698',1,0,'L',0);
+  $pdf->Cell(150,6,'0527769-8',1,0,'L',0);
 //-fin tabla presentacion cliente
   $pdf->Ln(15);
 
