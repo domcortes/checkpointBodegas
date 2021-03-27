@@ -22,9 +22,6 @@
 
         $salidafechaIn = $aaaaStart.$mmStart.$ddStart;
         $salidafechaOut = $aaaaEnd.$mmEnd.$ddEnd;
-
-        echo $salidafechaIn;
-        echo $salidafechaOut;
       } else {
         $fecha = new DateTime();
         $fecha->modify('first day of this month');
@@ -33,6 +30,9 @@
         $salidafechaIn = str_replace('-', '', $fecha->format('Y-m-d'));
         $salidafechaOut = str_replace('-', '', $fecha2->format('Y-m-d'));
       }
+
+              echo $salidafechaIn;
+        echo $salidafechaOut;
     } else {
       echo '<script>alert("No tienes acceso a esta ventana, seras redirigido al home"); window.location="/panel/home.php";</script>';
     }
