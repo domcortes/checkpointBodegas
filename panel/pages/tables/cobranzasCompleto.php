@@ -31,7 +31,7 @@
         $salidafechaOut = str_replace('-', '', $fecha2->format('Y-m-d'));
       }
 
-              echo $salidafechaIn;
+              echo $salidafechaIn.'<br>';
         echo $salidafechaOut;
     } else {
       echo '<script>alert("No tienes acceso a esta ventana, seras redirigido al home"); window.location="/panel/home.php";</script>';
