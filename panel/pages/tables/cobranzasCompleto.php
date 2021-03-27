@@ -237,9 +237,7 @@
                     ]);
                     $sentencia->execute();
                     $deudores = $sentencia->fetchAll();
-                    var_dump($deudores);
                     foreach ($deudores as $row) {
-                    // while ($sentencia->fetch(PDO::FETCH_ASSOC)) {
                             $fecha = new DateTime($row['Fecha']);
                             $fechaVencimiento = new DateTime($row['FVencimiento']);
                     ?>
