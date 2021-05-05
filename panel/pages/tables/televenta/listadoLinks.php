@@ -294,12 +294,16 @@
                       </td>
                       <td class="text-center"><?php echo '$ '.number_format($url['monto'],0,",","."); ?></td>
                       <td class="align-item-center">
-                        <?php if($url['boleta']==="0" || $url['tipoDocumento']=='SCO'){ ?>
+                        <?php if($url['boleta']==="0"){ ?>
                           <div class="btn-group btn-group-lg btn-block" role="group" aria-label="">
                             <input type="submit" name="ingrearDocumento" value="Ingresar" class="btn btn-success">
                           </div>
-		                    <?php } else {
-                          echo '<p class="text-center">No hay acciones disponibles</p>'; }?>
+		                    <?php } else if ($url['tipoDocumento']=='SCO'){
+                          echo '<p class="text-center">No hay acciones disponibles</p>';
+                        } else {
+                          echo '<p class="text-center">No hay acciones disponibles</p>';
+                        }
+                        ?>
                       </td>
                     </form>
                   </tr>
