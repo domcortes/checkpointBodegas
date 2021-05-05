@@ -246,7 +246,7 @@
                   <tbody>
                     <?php
                       $obj = new metodos();
-                      $sql = "SELECT * from url inner join usuarios on url.idUser = usuarios.idusuario;";
+                      $sql = "SELECT * from url inner join usuarios on url.idUser = usuarios.idusuario order by fechaCreacion asc; ";
                       $links = $obj->mostrarDatos($sql);
                       foreach ($links as $url) {
                     ?>
