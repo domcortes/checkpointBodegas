@@ -254,9 +254,7 @@
                     <form method="post" action="/panel/php/clases/procesos/actualizarLink.php">
                       <td class="text-center">
                         <?php
-                          $date = $url['fechaCreacion'];
-                          $newDate = date("d/m/Y", strtotime($date));
-                          echo $newDate;
+                          echo $url['fechaCreacion'];
                         ?>
                       </td>
                       <td id="vatra" name="vatra"><?php echo $url['valeTransitorio'] ?></td>
