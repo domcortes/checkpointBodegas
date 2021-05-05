@@ -216,7 +216,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <input type="button" class="btn-primary" name="exportarxls" id="exportarxls" value="Exportar Excel" disabled>
+              <input type="button" class="btn btn-primary" name="exportarxls" id="exportarxls" value="Exportar Excel" disabled>
             </ol>
           </div>
         </div>
