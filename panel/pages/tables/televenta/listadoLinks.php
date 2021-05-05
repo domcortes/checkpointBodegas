@@ -251,7 +251,13 @@
                     ?>
                   <tr>
                     <form method="post" action="/panel/php/clases/procesos/actualizarLink.php">
-                      <td class="text-center"><?php echo $url['fechaCreacion']; ?></td>
+                      <td class="text-center">
+                        <?php
+                          $date = $url['fechaCreacion'];
+                          $newDate = date("d/m/Y", strtotime($date));
+                          echo $newDate;
+                        ?>
+                      </td>
                       <td id="vatra" name="vatra"><?php echo $url['valeTransitorio'] ?></td>
                       <td id="user" name="user"><?php echo $url['nombreUsuario'];?></td>
                       <input type="hidden" name="idurl" id="idurl"value="<?php echo base64_encode(base64_encode(base64_encode($url['idUrl']))); ?>">
