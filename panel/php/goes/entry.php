@@ -3,7 +3,7 @@ require '../clases/connect.php';
     $username = !empty($_POST['user']) ? trim($_POST['user']) : null;
     $passwordAttempt = !empty($_POST['pass']) ? trim($_POST['pass']) : null;
 
-    $sql = "SELECT contrasenna, correoElectronico, idusuario, nivelAcceso, usuarioAcceso, sucursal FROM usuarios WHERE usuarioAcceso = '$username';";
+    $sql = "SELECT contrasenna, correoElectronico, idusuario, nivelAcceso, usuarioAcceso, sucursal FROM usuarios WHERE usuarioAcceso = '$username' and activo=1;";
     $stmt = $con->prepare($sql);
 
     $stmt->execute();
